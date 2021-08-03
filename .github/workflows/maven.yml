@@ -33,3 +33,10 @@ jobs:
         api_key: ${{ secrets.OCTOPUS_APIKEY }}
         server: ${{ secrets.OCTOPUS_SERVER }}
         packages: "build/DevOpsUsach2020-0.0.1.jar"
+    - name: Create a release in Octopus Deploy 🐙
+      uses: OctopusDeploy/create-release-action@v1.0.2
+      with:
+        api_key: ${{ secrets.OCTOPUS_APIKEY }}
+        server: ${{ secrets.OCTOPUS_SERVER }}
+        project: "test-bci"
+        deploy_to: "QA"
