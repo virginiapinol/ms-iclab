@@ -32,4 +32,4 @@ jobs:
       with:
         api_key: ${{ secrets.OCTOPUS_APIKEY }}
         server: ${{ secrets.OCTOPUS_SERVER }}
-        packages: "RandomQuotes.1.0.${{github.run_number}}.zip"
+        packages: "DevOpsUsach2020-0.0.1.jar"
