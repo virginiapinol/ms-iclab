@@ -9,8 +9,6 @@ pipeline {
         }
         stage('Compilación') {
             steps {
-	     git branch: 'main', url: 'https://github.com/virginiapinol/ms-iclab.git'
-
                 sh './mvnw clean compile -e'
             }
         }
