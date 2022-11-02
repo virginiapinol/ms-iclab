@@ -23,4 +23,9 @@ pipeline {
             }
         }
     }
+triggers {
+        githubPullRequest {
+            admin('virginiapinol')
+        }
+    }
 }
