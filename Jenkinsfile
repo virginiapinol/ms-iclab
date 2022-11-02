@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
         stage('Compilación') {
             steps {
                 sh './mvnw clean compile -e'
@@ -21,11 +26,6 @@ pipeline {
             steps {
                 sh 'nohup bash mvnw spring-boot:run &'
             }
-        }
-    }
-triggers {
-        githubPullRequest {
-            admin('virginiapinol')
         }
     }
 }
