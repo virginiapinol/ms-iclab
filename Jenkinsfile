@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World'
-            }
-        }
         stage('Compilación') {
             steps {
                 sh './mvnw clean compile -e'
