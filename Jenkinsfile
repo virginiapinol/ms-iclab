@@ -22,5 +22,19 @@ pipeline {
                 sh 'nohup bash mvnw spring-boot:run &'
             }
         }
+        stage('Build Deploy Code') {
+            when {
+                branch 'main'
+            }
+            steps {
+                sh """
+                echo "Building Artifact"
+                """
+
+                sh """
+                echo "Deploying Code"
+                """
+            }
+        }
     }
 }
