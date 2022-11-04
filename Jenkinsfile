@@ -23,25 +23,18 @@ pipeline {
         }
         stage('Build Deploy Code') {
             when {
-                branch 'main'
+                expression {
+                    return env.BRANCH_NAME != 'main';
+                }
             }
             steps {
-                sh """
-                echo "Building Artifact"
-                """
-
-                sh """
-                echo "Deploying Code"
-                """
+                merge(env.BRANCH_NAME, "main");
             }
         }
     }
     post{
         success{
             setBuildStatus("Build succeeded", "SUCCESS");
-            if (env.BRANCH_NAME != "main") { 
-                merge(env.BRANCH_NAME, "main");
-            }
         }
 
         failure {
