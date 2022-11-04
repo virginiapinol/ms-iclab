@@ -54,10 +54,12 @@ void setBuildStatus(String message, String state) {
 }
 
 def merge(String ramaOrigen, String ramaDestino) {
-    println "Este método realiza un merge" ${ramaOrigen} y ${ramaDestino}
+    println "Realizando checkout" ${ramaOrigen} y ${ramaDestino}
     
     checkout(ramaOrigen)
     checkout(ramaDestino)
+    
+    println "Realizando merge" ${ramaOrigen} y ${ramaDestino}
     
     sh """
         git merge ${ramaOrigen}
