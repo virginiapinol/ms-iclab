@@ -37,8 +37,10 @@ pipeline {
             }
         }
         stage('Pull request') {
-            sh 'git checkout -b ' + env.BRANCH_NAME + ' origin/' + main
-            sh 'hub pull-request -b origin/demo'
+            steps {
+                sh 'git checkout -b ' + env.BRANCH_NAME + ' origin/main'
+                sh 'hub pull-request -b origin/demo'
+            }
         }
     }
 }
