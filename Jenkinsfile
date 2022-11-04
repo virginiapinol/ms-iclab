@@ -35,10 +35,5 @@ pipeline {
                 """
             }
         }
-        stage('Pull request') {
-            steps {
-                sh 'gh pr create --base origin/main --head ' + env.BRANCH_NAME
-            }
-        }
     }
 }
