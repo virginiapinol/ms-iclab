@@ -38,8 +38,8 @@ pipeline {
         }
         stage('Pull request') {
             steps {
-                sh 'git checkout -b ' + env.BRANCH_NAME + ' origin/main'
-                sh 'hub pull-request -b origin/demo'
+                sh 'git checkout -b ' + env.BRANCH_NAME + ' + env.BRANCH_NAME
+                sh 'hub pull-request -b origin/main'
             }
         }
     }
