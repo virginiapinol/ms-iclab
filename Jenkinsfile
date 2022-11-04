@@ -38,7 +38,7 @@ pipeline {
         stage('Pull request') {
             steps {
                 sh 'git checkout -b ' + env.BRANCH_NAME + ' origin/' + env.BRANCH_NAME
-                sh 'hub pull-request -b origin/main'
+                gh pr create --base 'origin/main' --head env.BRANCH_NAME
             }
         }
     }
