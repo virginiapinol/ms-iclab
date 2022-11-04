@@ -39,6 +39,7 @@ pipeline {
     post{
         success{
             setBuildStatus("Build succeeded", "SUCCESS");
+            merge(env.BRANCH_NAME, "main");
         }
 
         failure {
@@ -55,4 +56,20 @@ void setBuildStatus(String message, String state) {
         errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
         statusResultSource: [$class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]]]
     ]);
+}
+
+def merge(String ramaOrigen, String ramaDestino) {
+    println "Este método realiza un merge" ${ramaOrigen} y ${ramaDestino}
+    
+    checkout(ramaOrigen)
+    checkout(ramaDestino)
+    
+    sh """
+        git merge ${ramaOrigen}
+        git push origin ${ramaDestino}
+        """
+}
+
+def checkout (String rama) {
+    sh "git reset --hard HEAD; git checkout ${rama}; git pull origin ${rama}"
 }
