@@ -21,17 +21,6 @@ pipeline {
                 sh 'nohup bash mvnw spring-boot:run &'
             }
         }
-        stage('Build Deploy Code') {
-            echo "Aquí debería hacer el merge"
-            /*when {
-                expression {
-                    return env.BRANCH_NAME != 'main';
-                }
-            }
-            steps {
-                gitmerge(env.BRANCH_NAME, "main");
-            }*/
-        }
     }
     post{
         success{
