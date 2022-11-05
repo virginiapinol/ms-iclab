@@ -21,25 +21,10 @@ pipeline {
                 sh 'nohup bash mvnw spring-boot:run &'
             }
         }
-        stage('Build Deploy Code') {
-            when {
-                branch 'main'
-            }
-            steps {
-                sh """
-                echo "Building Artifact"
-                """
-
-                sh """
-                echo "Deploying Code"
-                """
-            }
-        }
     }
     post{
         success{
             setBuildStatus("Build succeeded", "SUCCESS");
-            merge(env.BRANCH_NAME, "main");
         }
 
         failure {
@@ -58,18 +43,20 @@ void setBuildStatus(String message, String state) {
     ]);
 }
 
-def merge(String ramaOrigen, String ramaDestino) {
-    println "Este método realiza un merge" ${ramaOrigen} y ${ramaDestino}
+def gitmerge(String Originbranch, String destinybranch) {
+    println "Realizando checkout" ${Originbranch} y ${destinybranch}
     
-    checkout(ramaOrigen)
+    checkout(Originbranch)
     checkout(ramaDestino)
     
+    println "Realizando merge" ${Originbranch} y ${destinybranch}
+    
     sh """
-        git merge ${ramaOrigen}
-        git push origin ${ramaDestino}
+        git merge ${Originbranch}
+        git push origin ${destinybranch}
         """
 }
 
-def checkout (String rama) {
-    sh "git reset --hard HEAD; git checkout ${rama}; git pull origin ${rama}"
+def checkout (String branch) {
+    sh "git reset --hard HEAD; git checkout ${branch}; git pull origin ${branch}"
 }
