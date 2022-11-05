@@ -22,7 +22,7 @@ pipeline {
             }
         }
         stage('Build Deploy Code') {
-            println "Aquí debería hacer el merge";
+            println "Aquí debería hacer el merge"
             /*when {
                 expression {
                     return env.BRANCH_NAME != 'main';
