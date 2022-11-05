@@ -57,6 +57,6 @@ def gitmerge(String Originbranch, String destinybranch) {
         """
 }
 
-def checkout (String rama) {
-    sh "git reset --hard HEAD; git checkout ${rama}; git pull origin ${rama}"
+def checkout (String branch) {
+    sh "git reset --hard HEAD; git checkout ${branch}; git pull origin ${branch}"
 }
