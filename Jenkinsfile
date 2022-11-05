@@ -22,14 +22,15 @@ pipeline {
             }
         }
         stage('Build Deploy Code') {
-            when {
+            println "Aquí debería hacer el merge";
+            /*when {
                 expression {
                     return env.BRANCH_NAME != 'main';
                 }
             }
             steps {
-                merge(env.BRANCH_NAME, "main");
-            }
+                gitmerge(env.BRANCH_NAME, "main");
+            }*/
         }
     }
     post{
@@ -53,17 +54,17 @@ void setBuildStatus(String message, String state) {
     ]);
 }
 
-def merge(String ramaOrigen, String ramaDestino) {
-    println "Realizando checkout" ${ramaOrigen} y ${ramaDestino}
+def gitmerge(String Originbranch, String destinybranch) {
+    println "Realizando checkout" ${Originbranch} y ${destinybranch}
     
-    checkout(ramaOrigen)
+    checkout(Originbranch)
     checkout(ramaDestino)
     
-    println "Realizando merge" ${ramaOrigen} y ${ramaDestino}
+    println "Realizando merge" ${Originbranch} y ${destinybranch}
     
     sh """
-        git merge ${ramaOrigen}
-        git push origin ${ramaDestino}
+        git merge ${Originbranch}
+        git push origin ${destinybranch}
         """
 }
 
