@@ -61,7 +61,7 @@ pipeline {
             }
             steps {
                  withSonarQubeEnv('sonar') {
-                    sh './mvnw clean verify sonar:sonar -Dsonar.projectKey=ms-iclab -Dsonar.host.url=https://76616267025f.ngrok.io -Dsonar.login=sqp_316f34cd650a972183d9885915d964a2bcb27f31 -Dsonar.target=sonar.java.binaries'
+                    sh './mvnw clean verify sonar:sonar -Dsonar.projectKey=ms-iclab -Dsonar.host.url=https://f4ebfea9dc74.sa.ngrok.io -Dsonar.login=sqp_316f34cd650a972183d9885915d964a2bcb27f31 -Dsonar.target=sonar.java.binaries'
                 }
             }
             
@@ -76,6 +76,7 @@ pipeline {
 				branch "main"
 			}
             steps{
+
                 script {
                     pom = readMavenPom file: "pom.xml";
                     //filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
