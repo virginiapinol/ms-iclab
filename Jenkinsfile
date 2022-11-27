@@ -12,7 +12,7 @@ pipeline {
         choice(name: "TEST_CHOICE", choices: ["maven", "gradle",], description: "Sample multi-choice parameter")
     }
     stages {
-        /*stage('Checkout') {
+        stage('Checkout') {
             steps {
                 checkout scm
             }
@@ -25,7 +25,7 @@ pipeline {
                 chmod +x gradlew
                 '''
             }
-        }*/
+        }
         stage('get_commit_details') {
             steps {
                 script {
