@@ -55,13 +55,13 @@ pipeline {
                 }
             }
         }
-        stage('Análisis Sonarqube') {
+       stage('Análisis Sonarqube') {
             environment {
                 scannerHome = tool 'SonarScanner'
             }
             steps {
-                 withSonarQubeEnv('sonar') {
-                    sh './mvnw clean verify sonar:sonar -Dsonar.projectKey=ms-iclab -Dsonar.host.url=https://f4ebfea9dc74.sa.ngrok.io -Dsonar.login=sqp_316f34cd650a972183d9885915d964a2bcb27f31 -Dsonar.target=sonar.java.binaries'
+                 withSonarQubeEnv('SonarServer-1') {
+                    sh './mvnw clean verify sonar:sonar -Dsonar.projectKey=lab1-mod3 -Dsonar.host.url=http://178.128.155.87:9000 -Dsonar.login=sqp_3b879c0e3e708f0dbcbfdfdf81b432e84560c4e1'
                 }
             }
             
