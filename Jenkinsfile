@@ -31,6 +31,7 @@ pipeline {
                 script {
                     env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
                     env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
+                    //env.GIT_TAG = sh (script: 'git tag --contains "0.0.4"', returnStdout: true).trim()
                     //env.GIT_BRANCH = sh (script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
                     //env.GIT_TAG = sh (script: 'git describe --tags --abbrev=0', returnStdout: true).trim()
                 }
@@ -109,15 +110,25 @@ pipeline {
             echo "Realizando merge a main ${GIT_BRANCH}";
 
             script{
-                git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
-                sh '''
+                //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
+                sh 'git config --global user.email "vppinol@gmail.com"'
+                sh 'git config --global user.name "Virginia Pino"'
+                sh 'git tag -d "0.0.4"'
+                sh 'git tag -a "0.0.4" -m "Nueva versión"'
+                sh 'git merge origin/${GIT_BRANCH}'
+                sh 'git commit -am "Merged feature branch to main"'
+                sh 'git fetch origin'
+                sh 'git branch'
+                sh 'git push origin main'
+
+               /* sh '''
                 #!/bin/bash
                 git checkout origin/main
                 git merge origin/${GIT_BRANCH}
                 git push 
                 git push origin --delete origin/${GIT_BRANCH}
 
-                '''
+                '''*/
             }
         }
 
