@@ -12,11 +12,11 @@ pipeline {
         choice(name: "TEST_CHOICE", choices: ["maven", "gradle",], description: "Sample multi-choice parameter")
     }
     stages {
-        stage('Checkout') {
+        /*stage('Checkout') {
             steps {
                 checkout scm
             }
-        }
+        }*/
         stage('Agregando permisos'){
             steps {
                 sh '''#!/bin/bash
@@ -31,10 +31,12 @@ pipeline {
                 script {
                     env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
                     env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
+                    //env.GIT_BRANCH = sh (script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                    //env.GIT_TAG = sh (script: 'git describe --tags --abbrev=0', returnStdout: true).trim()
                 }
             }
         }
-        stage('Carga script') {
+       /* stage('Carga script') {
             steps {
                 script {
                     code = load "./${params.TEST_CHOICE}.groovy"
@@ -93,9 +95,9 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
     }
-post{
+    post{
         success{
             setBuildStatus("Build succeeded", "SUCCESS");
 
@@ -103,6 +105,21 @@ post{
                 color:COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* ${env.GIT_AUTHOR} ${env.JOB_NAME} build ${env.BUILD_NUMBER}  Ejecución exitosa"
 */
+
+            echo "Realizando merge a main ${GIT_BRANCH}";
+
+            script{
+                git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
+                sh '''
+                #!/bin/bash
+                git fetch origin
+                git checkout origin/main
+                git merge origin/${GIT_BRANCH}
+                git push 
+                git push origin --delete origin/${GIT_BRANCH}
+
+                '''
+            }
         }
 
         failure {
