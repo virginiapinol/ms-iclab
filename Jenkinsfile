@@ -112,7 +112,6 @@ pipeline {
                 git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
                 sh '''
                 #!/bin/bash
-                git fetch origin
                 git checkout origin/main
                 git merge origin/${GIT_BRANCH}
                 git push 
