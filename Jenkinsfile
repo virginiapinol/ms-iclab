@@ -124,7 +124,7 @@ pipeline {
                     sh 'git commit -am "Merged feature branch to main"'
                     sh 'git branch'
                     echo "usuario: ${GIT_USERNAME} password: ${GIT_PASSWORD} y version: ${pomVersion}"
-                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/g3-usach-2022/ms-iclab.git ${pomVersion}"
+                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git ${pomVersion}"
 
                 /* sh '''
                     #!/bin/bash
