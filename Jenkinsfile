@@ -141,7 +141,7 @@ pipeline {
 
                     sh '''
                         #!/bin/bash
-                        git checkout origin/main
+                        git checkout main
                         git merge origin/${GIT_BRANCH}
                         git git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git
                         git push origin --delete origin/${GIT_BRANCH}
