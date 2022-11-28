@@ -111,24 +111,27 @@ pipeline {
 
             script{
                 //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
-                sh 'git config --global user.email "vppinol@gmail.com"'
-                sh 'git config --global user.name "virginiapinol"'
-                //sh 'git tag -d "0.0.4"'
-                sh 'git tag -a "0.0.6" -m "Nueva versión"'
-                sh 'git merge origin/${GIT_BRANCH}'
-                sh 'git commit -am "Merged feature branch to main"'
-                sh 'git fetch origin'
-                sh 'git branch'
-                sh 'git push origin HEAD:main'
+                //withCredentials([gitUsernamePassword(credentialsId: 'github_virginia', gitToolName: 'git-tool')]) {
+                    sh 'git config --global user.email "vppinol@gmail.com"'
+                    sh 'git config --global user.name "virginiapinol"'
+                    //sh 'git tag -d "0.0.4"'
+                    sh 'git tag -a "0.0.6" -m "Nueva versión"'
+                    sh 'git merge origin/${GIT_BRANCH}'
+                    sh 'git commit -am "Merged feature branch to main"'
+                    sh 'git fetch origin'
+                    sh 'git branch'
+                    //sh 'git push origin HEAD:main'
+                    gitPush()
 
-               /* sh '''
-                #!/bin/bash
-                git checkout origin/main
-                git merge origin/${GIT_BRANCH}
-                git push 
-                git push origin --delete origin/${GIT_BRANCH}
+                /* sh '''
+                    #!/bin/bash
+                    git checkout origin/main
+                    git merge origin/${GIT_BRANCH}
+                    git push 
+                    git push origin --delete origin/${GIT_BRANCH}
 
-                '''*/
+                    '''*/
+               // }
             }
         }
 
