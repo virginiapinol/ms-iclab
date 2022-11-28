@@ -108,47 +108,48 @@ pipeline {
                 color:COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* ${env.GIT_AUTHOR} ${env.JOB_NAME} build ${env.BUILD_NUMBER}  Ejecución exitosa"
 */
+			if (env.BRANCH_NAME != 'main') {
+                echo "Realizando merge a main ${GIT_BRANCH}";
 
-            echo "Realizando merge a main ${GIT_BRANCH}";
-
-            script{
-                //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
-                withCredentials([usernamePassword(credentialsId: 'acceso-vpino-2', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-
-
-                    sh 'git config --global user.email "vppinol@gmail.com"'
-                    sh 'git config --global user.name "virginiapinol"'
-                    sh 'git branch'
-
-                    /*sh 'git remote update'
-                    sh 'git fetch'
-                    sh 'git checkout --track origin/main'*/
-
-                    /*sh 'git branch -b tmp main'
-                    sh 'git checkout main'
-                    sh 'git merge tmp'
-                    sh 'git branch -d tmp'*/
+                script{
+                    //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
+                    withCredentials([usernamePassword(credentialsId: 'acceso-vpino-2', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 
 
+                        sh 'git config --global user.email "vppinol@gmail.com"'
+                        sh 'git config --global user.name "virginiapinol"'
+                        sh 'git branch'
 
-                    //sh 'git branch'
-                    //sh 'git tag -d "0.0.4"'
-                    /*sh 'git switch origin/main'
-                    sh 'git tag -a "${pomVersion}" -m "Nueva versión"'
-                    sh 'git merge origin/${GIT_BRANCH}'
-                    sh 'git commit -am "Merged feature branch to main"'
-                    //echo "usuario: ${GIT_USERNAME} password: ${GIT_PASSWORD} y version: ${pomVersion}"
-                    echo "Antes de Git push ${GIT_BRANCH}";*/
-                    //sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
+                        /*sh 'git remote update'
+                        sh 'git fetch'
+                        sh 'git checkout --track origin/main'*/
 
-                 sh '''
-                    #!/bin/bash
-                    git checkout origin/main
-                    git merge origin/${GIT_BRANCH}
-                    git git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git
-                    git push origin --delete origin/${GIT_BRANCH}
+                        /*sh 'git branch -b tmp main'
+                        sh 'git checkout main'
+                        sh 'git merge tmp'
+                        sh 'git branch -d tmp'*/
 
-                    '''
+
+
+                        //sh 'git branch'
+                        //sh 'git tag -d "0.0.4"'
+                        /*sh 'git switch origin/main'
+                        sh 'git tag -a "${pomVersion}" -m "Nueva versión"'
+                        sh 'git merge origin/${GIT_BRANCH}'
+                        sh 'git commit -am "Merged feature branch to main"'
+                        //echo "usuario: ${GIT_USERNAME} password: ${GIT_PASSWORD} y version: ${pomVersion}"
+                        echo "Antes de Git push ${GIT_BRANCH}";*/
+                        //sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
+
+                    sh '''
+                        #!/bin/bash
+                        git checkout origin/main
+                        git merge origin/${GIT_BRANCH}
+                        git git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git
+                        git push origin --delete origin/${GIT_BRANCH}
+
+                        '''
+                    }
                 }
             }
         }
