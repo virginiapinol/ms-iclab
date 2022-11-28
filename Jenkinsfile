@@ -142,8 +142,7 @@ pipeline {
                     sh '''
                         #!/bin/bash
                         git remote -v
-origin  git@github.com:virginiapinol/ms-iclab (fetch)
-origin  git@github.com:virginiapinol/ms-iclab (push)
+origin  git@github.com:virginiapinol/ms-iclab
 git remote remove origin
 git remote add origin git@github.com:virginiapinol/ms-iclab.git
 git pull --ff-only
