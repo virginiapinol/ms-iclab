@@ -113,7 +113,7 @@ pipeline {
 
             script{
                 //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
-                withCredentials([usernamePassword(credentialsId: 'github_virginia', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'acceso-vpino-2', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 
 
                     sh 'git config --global user.email "vppinol@gmail.com"'
@@ -123,7 +123,7 @@ pipeline {
                     sh 'git merge origin/${GIT_BRANCH}'
                     sh 'git commit -am "Merged feature branch to main"'
                     sh 'git branch'
-                    echo "usuario: ${GIT_USERNAME} password: ${GIT_PASSWORD} y version: ${pomVersion}"
+                    //echo "usuario: ${GIT_USERNAME} password: ${GIT_PASSWORD} y version: ${pomVersion}"
                     sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git ${pomVersion}"
 
                 /* sh '''
