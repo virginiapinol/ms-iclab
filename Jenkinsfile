@@ -141,6 +141,13 @@ pipeline {
 
                     sh '''
                         #!/bin/bash
+                        git remote -v
+origin  git@github.com:virginiapinol/ms-iclab (fetch)
+origin  git@github.com:virginiapinol/ms-iclab (push)
+git remote remove origin
+git remote add origin git@github.com:virginiapinol/ms-iclab.git
+git pull --ff-only
+git branch --set-upstream-to=origin/current_branch
                         git checkout main
                         git merge origin/${GIT_BRANCH}
                         git git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git
