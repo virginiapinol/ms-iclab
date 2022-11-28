@@ -118,12 +118,14 @@ pipeline {
 
                     sh 'git config --global user.email "vppinol@gmail.com"'
                     sh 'git config --global user.name "virginiapinol"'
+                    sh 'git branch'
+                    sh 'git checkout main'
+                    sh 'git branch'
                     //sh 'git tag -d "0.0.4"'
                     sh 'git switch origin/main'
                     sh 'git tag -a "${pomVersion}" -m "Nueva versión"'
                     sh 'git merge origin/${GIT_BRANCH}'
                     sh 'git commit -am "Merged feature branch to main"'
-                    sh 'git branch'
                     //echo "usuario: ${GIT_USERNAME} password: ${GIT_PASSWORD} y version: ${pomVersion}"
                     echo "Antes de Git push ${GIT_BRANCH}";
                     sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
