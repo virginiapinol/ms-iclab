@@ -121,9 +121,9 @@ pipeline {
                     sh "git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
                     sh 'git branch'
 
-                    sh 'git remote update'
+                    /*sh 'git remote update'
                     sh 'git fetch'
-                    sh 'git checkout --track origin/main'
+                    sh 'git checkout --track origin/main'*/
 
                     /*git branch tmp'
                     sh 'git checkout main'
@@ -132,7 +132,7 @@ pipeline {
 
 
 
-                    sh 'git branch'
+                    //sh 'git branch'
                     //sh 'git tag -d "0.0.4"'
                     /*sh 'git switch origin/main'
                     sh 'git tag -a "${pomVersion}" -m "Nueva versión"'
@@ -140,7 +140,7 @@ pipeline {
                     sh 'git commit -am "Merged feature branch to main"'
                     //echo "usuario: ${GIT_USERNAME} password: ${GIT_PASSWORD} y version: ${pomVersion}"
                     echo "Antes de Git push ${GIT_BRANCH}";*/
-                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
+                    //sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
 
                 /* sh '''
                     #!/bin/bash
