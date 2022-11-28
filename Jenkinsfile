@@ -118,14 +118,13 @@ pipeline {
 
                     sh 'git config --global user.email "vppinol@gmail.com"'
                     sh 'git config --global user.name "virginiapinol"'
-                    sh "git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
                     sh 'git branch'
 
                     /*sh 'git remote update'
                     sh 'git fetch'
                     sh 'git checkout --track origin/main'*/
 
-                    /*git branch tmp'
+                    /*sh 'git branch -b tmp main'
                     sh 'git checkout main'
                     sh 'git merge tmp'
                     sh 'git branch -d tmp'*/
@@ -142,14 +141,14 @@ pipeline {
                     echo "Antes de Git push ${GIT_BRANCH}";*/
                     //sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
 
-                /* sh '''
+                 sh '''
                     #!/bin/bash
                     git checkout origin/main
                     git merge origin/${GIT_BRANCH}
-                    git push 
+                    git git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git
                     git push origin --delete origin/${GIT_BRANCH}
 
-                    '''*/
+                    '''
                 }
             }
         }
