@@ -108,12 +108,12 @@ pipeline {
 */
 
             echo "Realizando merge a main ${GIT_BRANCH}";
+            echo "tag name: ${TAG_NAME}";
 
             script{
                 //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
                 sh 'git config --global user.email "vppinol@gmail.com"'
                 sh 'git config --global user.name "Virginia Pino"'
-                sh 'git tag -d "0.0.4"'
                 sh 'git tag -a "0.0.4" -m "Nueva versión"'
                 sh 'git merge origin/${GIT_BRANCH}'
                 sh 'git commit -am "Merged feature branch to main"'
