@@ -115,7 +115,7 @@ pipeline {
 
                     git url: "ssh://virginiapinol@ms-iclab:GiNi190687%/https://github.com/virginiapinol/ms-iclab.git",
                     credentialsId: 'github_virginia',
-                    branch: ${GIT_BRANCH}
+                    branch: "${GIT_BRANCH}"
 
                     sh 'git config --global user.email "vppinol@gmail.com"'
                     sh 'git config --global user.name "virginiapinol"'
