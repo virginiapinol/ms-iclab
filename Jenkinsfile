@@ -108,10 +108,10 @@ pipeline {
                 color:COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* ${env.GIT_AUTHOR} ${env.JOB_NAME} build ${env.BUILD_NUMBER}  Ejecución exitosa"
 */
-			if (env.BRANCH_NAME != 'main') {
-                echo "Realizando merge a main ${GIT_BRANCH}";
 
-                script{
+            script{
+                if (env.BRANCH_NAME != 'main') {
+                    echo "Realizando merge a main ${GIT_BRANCH}";
                     //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
                     withCredentials([usernamePassword(credentialsId: 'acceso-vpino-2', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 
