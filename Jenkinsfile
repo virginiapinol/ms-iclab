@@ -118,12 +118,17 @@ pipeline {
 
                     sh 'git config --global user.email "vppinol@gmail.com"'
                     sh 'git config --global user.name "virginiapinol"'
+                    sh "git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
                     sh 'git branch'
 
-                    sh 'git branch tmp'
+                    sh 'git remote update'
+                    sh 'git fetch'
+                    sh 'git checkout --track origin/main'
+
+                    /*git branch tmp'
                     sh 'git checkout main'
                     sh 'git merge tmp'
-                    sh 'git branch -d tmp'
+                    sh 'git branch -d tmp'*/
 
 
 
