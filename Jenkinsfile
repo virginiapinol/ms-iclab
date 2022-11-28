@@ -112,9 +112,9 @@ pipeline {
             script{
                 //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
                 sh 'git config --global user.email "vppinol@gmail.com"'
-                sh 'git config --global user.name "Virginia Pino"'
+                sh 'git config --global user.name "virginiapinol"'
                 //sh 'git tag -d "0.0.4"'
-                sh 'git tag -a "0.0.5" -m "Nueva versión"'
+                sh 'git tag -a "0.0.6" -m "Nueva versión"'
                 sh 'git merge origin/${GIT_BRANCH}'
                 sh 'git commit -am "Merged feature branch to main"'
                 sh 'git fetch origin'
