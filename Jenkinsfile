@@ -7,7 +7,9 @@ def COLOR_MAP =[
 
 pipeline {
     agent any
-
+    environment {
+        pomVersion = readMavenPom().getVersion()
+    }
     parameters {
         choice(name: "TEST_CHOICE", choices: ["maven", "gradle",], description: "Sample multi-choice parameter")
     }
@@ -111,21 +113,18 @@ pipeline {
 
             script{
                 //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
-                //withCredentials([gitUsernamePassword(credentialsId: 'github_virginia', gitToolName: 'git-tool')]) {
+                withCredentials([usernamePassword(credentialsId: 'github_virginia', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 
-                    git url: "ssh://virginiapinol@ms-iclab:GiNi190687%/https://github.com/virginiapinol/ms-iclab.git",
-                    credentialsId: 'github_virginia',
-                    branch: "${GIT_BRANCH}"
 
                     sh 'git config --global user.email "vppinol@gmail.com"'
                     sh 'git config --global user.name "virginiapinol"'
                     //sh 'git tag -d "0.0.4"'
-                    sh 'git tag -a "0.0.8" -m "Nueva versión"'
+                    sh 'git tag -a "${pomVersion}" -m "Nueva versión"'
                     sh 'git merge origin/${GIT_BRANCH}'
                     sh 'git commit -am "Merged feature branch to main"'
-                    sh 'git fetch origin'
                     sh 'git branch'
-                    sh 'git push origin HEAD:main'
+                    echo "usuario: ${GIT_USERNAME} password: ${GIT_PASSWORD} y version: ${pomVersion}"
+                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/g3-usach-2022/ms-iclab.git ${pomVersion}"
 
                 /* sh '''
                     #!/bin/bash
@@ -135,7 +134,7 @@ pipeline {
                     git push origin --delete origin/${GIT_BRANCH}
 
                     '''*/
-               // }
+                }
             }
         }
 
