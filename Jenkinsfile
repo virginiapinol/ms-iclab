@@ -108,7 +108,6 @@ pipeline {
 */
 
             echo "Realizando merge a main ${GIT_BRANCH}";
-            echo "tag name: ${TAG_NAME}";
 
             script{
                 //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
