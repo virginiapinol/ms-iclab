@@ -114,8 +114,6 @@ pipeline {
                     echo "Realizando merge a main ${GIT_BRANCH}";
                     //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
                     withCredentials([usernamePassword(credentialsId: 'acceso-vpino-2', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-
-
                         sh 'git config --global user.email "vppinol@gmail.com"'
                         sh 'git config --global user.name "virginiapinol"'
                         sh 'git branch'
