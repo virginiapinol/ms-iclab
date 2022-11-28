@@ -118,23 +118,37 @@ pipeline {
 
                     sh 'git config --global user.email "vppinol@gmail.com"'
                     sh 'git config --global user.name "virginiapinol"'
+                    sh 'git branch'
+
+                    /*sh 'git remote update'
+                    sh 'git fetch'
+                    sh 'git checkout --track origin/main'*/
+
+                    /*sh 'git branch -b tmp main'
+                    sh 'git checkout main'
+                    sh 'git merge tmp'
+                    sh 'git branch -d tmp'*/
+
+
+
+                    //sh 'git branch'
                     //sh 'git tag -d "0.0.4"'
-                    sh 'git switch origin/main'
+                    /*sh 'git switch origin/main'
                     sh 'git tag -a "${pomVersion}" -m "Nueva versión"'
                     sh 'git merge origin/${GIT_BRANCH}'
                     sh 'git commit -am "Merged feature branch to main"'
-                    sh 'git branch'
                     //echo "usuario: ${GIT_USERNAME} password: ${GIT_PASSWORD} y version: ${pomVersion}"
-                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git ${pomVersion}"
+                    echo "Antes de Git push ${GIT_BRANCH}";*/
+                    //sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
 
-                /* sh '''
+                 sh '''
                     #!/bin/bash
                     git checkout origin/main
                     git merge origin/${GIT_BRANCH}
-                    git push 
+                    git git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git
                     git push origin --delete origin/${GIT_BRANCH}
 
-                    '''*/
+                    '''
                 }
             }
         }
