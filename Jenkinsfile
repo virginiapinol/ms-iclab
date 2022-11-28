@@ -7,16 +7,18 @@ def COLOR_MAP =[
 
 pipeline {
     agent any
-
+    environment {
+        pomVersion = readMavenPom().getVersion()
+    }
     parameters {
         choice(name: "TEST_CHOICE", choices: ["maven", "gradle",], description: "Sample multi-choice parameter")
     }
     stages {
-        /*stage('Checkout') {
+        stage('Checkout') {
             steps {
                 checkout scm
             }
-        }*/
+        }
         stage('Agregando permisos'){
             steps {
                 sh '''#!/bin/bash
@@ -31,7 +33,8 @@ pipeline {
                 script {
                     env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
                     env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
-                    //env.GIT_BRANCH = sh (script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                    //env.GIT_TAG = sh (script: 'git tag --contains "0.0.4"', returnStdout: true).trim()
+                    env.GIT_BRANCH = sh (script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
                     //env.GIT_TAG = sh (script: 'git describe --tags --abbrev=0', returnStdout: true).trim()
                 }
             }
@@ -109,15 +112,31 @@ pipeline {
             echo "Realizando merge a main ${GIT_BRANCH}";
 
             script{
-                git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
-                sh '''
-                #!/bin/bash
-                git checkout origin/main
-                git merge origin/${GIT_BRANCH}
-                git push 
-                git push origin --delete origin/${GIT_BRANCH}
+                //git branch: "${GIT_BRANCH}", credentialsId: 'github_virginia', url: 'https://github.com/virginiapinol/ms-iclab.git'
+                withCredentials([usernamePassword(credentialsId: 'acceso-vpino-2', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 
-                '''
+
+                    sh 'git config --global user.email "vppinol@gmail.com"'
+                    sh 'git config --global user.name "virginiapinol"'
+                    //sh 'git tag -d "0.0.4"'
+                    sh 'git switch origin/main'
+                    sh 'git tag -a "${pomVersion}" -m "Nueva versión"'
+                    sh 'git merge origin/${GIT_BRANCH}'
+                    sh 'git commit -am "Merged feature branch to main"'
+                    sh 'git branch'
+                    //echo "usuario: ${GIT_USERNAME} password: ${GIT_PASSWORD} y version: ${pomVersion}"
+                    echo "Antes de Git push ${GIT_BRANCH}";
+                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git"
+
+                /* sh '''
+                    #!/bin/bash
+                    git checkout origin/main
+                    git merge origin/${GIT_BRANCH}
+                    git push 
+                    git push origin --delete origin/${GIT_BRANCH}
+
+                    '''*/
+                }
             }
         }
 
