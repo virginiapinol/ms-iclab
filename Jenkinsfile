@@ -12,11 +12,11 @@ pipeline {
         choice(name: "TEST_CHOICE", choices: ["maven", "gradle",], description: "Sample multi-choice parameter")
     }
     stages {
-        /*stage('Checkout') {
+        stage('Checkout') {
             steps {
                 checkout scm
             }
-        }*/
+        }
         stage('Agregando permisos'){
             steps {
                 sh '''#!/bin/bash
@@ -120,8 +120,7 @@ pipeline {
                     sh 'git commit -am "Merged feature branch to main"'
                     sh 'git fetch origin'
                     sh 'git branch'
-                    //sh 'git push origin HEAD:main'
-                    gitPush()
+                    sh 'git push origin HEAD:main'
 
                 /* sh '''
                     #!/bin/bash
