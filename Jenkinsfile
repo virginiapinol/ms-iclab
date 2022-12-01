@@ -105,10 +105,10 @@ pipeline {
 			}
             steps{
                 sh '''
-                        #!/bin/bash
-                        git tag "v."${pomVersion}
-                        git push --tags                     '''
-                    }
+                #!/bin/bash
+                git tag "v."${pomVersion}
+                git push --tags                     
+                '''
             }
         }
     }
