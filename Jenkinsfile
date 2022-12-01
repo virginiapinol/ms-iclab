@@ -104,14 +104,16 @@ pipeline {
 				branch "main"
 			}
             steps{
-                sh '''
-                #!/bin/bash
-                git tag "v."${pomVersion}
-                git push --tags                     
-                '''
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'acceso-vpino-2', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                sh 'git config --global user.email "vppinol@gmail.com"'
+                sh 'git config --global user.name "virginiapinol"'
+                sh 'git tag "v."${pomVersion}'
+                sh 'git pushhttps://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git --tags'
+                    }
+                }
             }
         }
-    }
     post{
         success{
             setBuildStatus("Build succeeded", "SUCCESS");
@@ -131,7 +133,7 @@ pipeline {
                         git push --tags
                         git checkout main
                         git merge origin/${GIT_BRANCH}
-                        git git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git
+                        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git
                         git push origin --delete origin/${GIT_BRANCH}
 
                                                 '''
@@ -152,7 +154,7 @@ pipeline {
 
             slackSend channel:'#lab-ceres-mod4-sec1-status',
                     color:COLOR_MAP[currentBuild.currentResult],
-                    message: "[Grupo5][Pipeline IC/CD][Rama: 'v.'${pomVersion}][Stage: test][Resultado: Error/Fail]."
+                    message: "[Grupo5][Pipeline IC/CD][Versión: 'v.'${pomVersion}][Stage: test][Resultado: Error/Fail]."
                     //*${currentBuild.currentResult}:* ${env.GIT_AUTHOR} ${env.JOB_NAME} Ejecución fallida en stage: build ${env.BUILD_NUMBER}"
 
         } 
