@@ -128,8 +128,7 @@ pipeline {
 
             slackSend channel:'#lab-ceres-mod4-sec1-status',
                 color:COLOR_MAP[currentBuild.currentResult],
-                message: "[Grupo5][Pipeline IC/CD][Rama: ${GIT_BRANCH}][Stage: build][Resultado:
-Éxito/Success]"
+                message: "[Grupo5][Pipeline IC/CD][Rama: ${GIT_BRANCH}][Stage: build][Resultado:Éxito/Success]"
                 //*${currentBuild.currentResult}:* ${env.GIT_AUTHOR} ${env.JOB_NAME} build ${env.BUILD_NUMBER}  Ejecución exitosa"
 
                 }
@@ -141,8 +140,7 @@ pipeline {
 
             slackSend channel:'#lab-ceres-mod4-sec1-status',
                     color:COLOR_MAP[currentBuild.currentResult],
-                    message: "[Grupo5][Pipeline IC/CD][Rama: 'v.'${pomVersion}][Stage: test][Resultado:
-Error/Fail]."
+                    message: "[Grupo5][Pipeline IC/CD][Rama: 'v.'${pomVersion}][Stage: test][Resultado: Error/Fail]."
                     //*${currentBuild.currentResult}:* ${env.GIT_AUTHOR} ${env.JOB_NAME} Ejecución fallida en stage: build ${env.BUILD_NUMBER}"
 
         } 
