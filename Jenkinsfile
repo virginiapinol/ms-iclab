@@ -104,16 +104,19 @@ pipeline {
 				branch "main"
 			}
             steps{
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'acceso-vpino-2', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                sh 'git config --global user.email "vppinol@gmail.com"'
-                sh 'git config --global user.name "virginiapinol"'
-                sh 'git tag "v."${pomVersion}'
-                sh 'git pushhttps://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git --tags'
+                script 
+                {
+                    withCredentials([usernamePassword(credentialsId: 'acceso-vpino-2', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) 
+                    {
+                    sh 'git config --global user.email "vppinol@gmail.com"'
+                    sh 'git config --global user.name "virginiapinol"'
+                    sh 'git tag "v."${pomVersion}'
+                    sh 'git pushhttps://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git --tags'
                     }
                 }
             }
         }
+    }
     post{
         success{
             setBuildStatus("Build succeeded", "SUCCESS");
