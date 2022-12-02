@@ -143,11 +143,10 @@ pipeline {
                     }
                     */
 
-            slackSend channel:'#lab-ceres-mod4-sec1-status',
-                color:COLOR_MAP[currentBuild.currentResult],
-                message: "[Grupo5][Pipeline IC/CD][Rama: ${GIT_BRANCH}][Stage: build][Resultado:Éxito/Success]"
-                //*${currentBuild.currentResult}:* ${env.GIT_AUTHOR} ${env.JOB_NAME} build ${env.BUILD_NUMBER}  Ejecución exitosa"
-
+                    /*slackSend channel:'#lab-ceres-mod4-sec1-status',
+                        color:COLOR_MAP[currentBuild.currentResult],
+                        message: "[Grupo5][Pipeline IC/CD][Rama: ${GIT_BRANCH}][Stage: build][Resultado:Éxito/Success]"
+                    */
                 }
             }
         }
@@ -155,11 +154,10 @@ pipeline {
         failure {
             setBuildStatus("Build failed", "FAILURE");
 
-            slackSend channel:'#lab-ceres-mod4-sec1-status',
+            /*slackSend channel:'#lab-ceres-mod4-sec1-status',
                     color:COLOR_MAP[currentBuild.currentResult],
                     message: "[Grupo5][Pipeline IC/CD][Versión: 'v.'${pomVersion}][Stage: test][Resultado: Error/Fail]."
-                    //*${currentBuild.currentResult}:* ${env.GIT_AUTHOR} ${env.JOB_NAME} Ejecución fallida en stage: build ${env.BUILD_NUMBER}"
-
+                  */ 
         } 
     }
 }
