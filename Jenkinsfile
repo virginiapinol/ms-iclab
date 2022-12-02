@@ -119,7 +119,7 @@ pipeline {
         stage('Test artefacto') {
             steps {
                 echo "Test artefacto versión ${pomVersion}"
-                withCredentials([usernameColonPassword(credentialsId: 'jenkins-nexus')]) {
+                withCredentials([usernamePassword(credentialsId: 'jenkins-nexus', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh(
                         'curl -X GET -u "${GIT_USERNAME}:${GIT_PASSWORD}" -O http://178.128.155.87:8081/repository/com/DevOpsUsach2020/${pomVersion}/DevOpsUsach2020-0.0.1.jar'
                     )
