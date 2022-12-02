@@ -111,7 +111,7 @@ pipeline {
                     sh 'git config --global user.email "vppinol@gmail.com"'
                     sh 'git config --global user.name "virginiapinol"'
                     sh 'git tag "v."${pomVersion}'
-                    sh 'git pushhttps://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git --tags'
+                    sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/virginiapinol/ms-iclab.git --tags'
                     }
                 }
             }
