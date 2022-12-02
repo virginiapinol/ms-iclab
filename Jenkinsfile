@@ -116,6 +116,23 @@ pipeline {
                 }
             }
         }
+        stage('Test artefacto') {
+            steps {
+                    withCredentials([usernameColonPassword(credentialsId: 'jenkins-nexus')]) {
+                    sh(
+                        'curl -X GET -u "${GIT_USERNAME}" -O ' + 
+                        "\"http://178.128.155.87:8081/repository/com/DevOpsUsach2020/${pomVersion}/DevOpsUsach2020-${pomVersion}.jar\""
+                    )
+                }
+                sh(
+                    "java -jar \"DevOpsUsach2020-${pomVersion}.jar\" & " + 
+                    '''JAVA_PID="$!"
+                    sleep 10
+                    curl -X GET "http://178.128.155.87:8081/rest/mscovid/test?msg=testing"
+                    kill $JAVA_PID'''
+                )
+            }
+        }
     }
     post{
         success{
