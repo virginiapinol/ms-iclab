@@ -121,14 +121,14 @@ pipeline {
                 echo "Test artefacto versión ${pomVersion}"
                 withCredentials([usernamePassword(credentialsId: 'jenkins-nexus', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh(
-                        'curl -X GET -u "${GIT_USERNAME}:${GIT_PASSWORD}" -O http://178.128.155.87:8081/repository/com/DevOpsUsach2020/${pomVersion}/DevOpsUsach2020-${pomVersion}.jar'
+                        'curl -X GET -u "${GIT_USERNAME}:${GIT_PASSWORD}" -O http://178.128.155.87:8081/repository/devops-usach-nexus/com/devopsusach2020/DevOpsUsach2020/${pomVersion}/DevOpsUsach2020-${pomVersion}.jar'
                     )
                 }
                 sh(
                     "java -jar \"DevOpsUsach2020-${pomVersion}.jar\" & " + 
                     '''JAVA_PID="$!"
                     sleep 10
-                    curl -X GET "http://178.128.155.87:8081/rest/mscovid/test?msg=testing"
+                    curl -X GET "http://178.128.155.87:8080/rest/mscovid/test?msg=testing"
                     kill $JAVA_PID'''
                 )
             }
