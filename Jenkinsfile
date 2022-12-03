@@ -53,7 +53,7 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+        stage('Test Code') {
             steps {
                 script {
                     code.Test()
@@ -116,7 +116,7 @@ pipeline {
                 }
             }
         }
-        stage('Test artefacto') {
+        stage('Test artefacto conexión') {
             when {
 				branch "main"
 			}
