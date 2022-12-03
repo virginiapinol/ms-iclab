@@ -117,6 +117,9 @@ pipeline {
             }
         }
         stage('Test artefacto') {
+            when {
+				branch "main"
+			}
             steps {
                 echo "Test artefacto versión ${pomVersion}"
                 withCredentials([usernamePassword(credentialsId: 'jenkins-nexus', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
@@ -160,10 +163,10 @@ pipeline {
                     }
                     */
 
-                    /*slackSend channel:'#lab-ceres-mod4-sec1-status',
+                    slackSend channel:'#lab-ceres-mod4-sec1-status',
                         color:COLOR_MAP[currentBuild.currentResult],
                         message: "[Grupo5][Pipeline IC/CD][Rama: ${GIT_BRANCH}][Stage: build][Resultado:Éxito/Success]"
-                    */
+                    
                 }
             }
         }
@@ -171,10 +174,10 @@ pipeline {
         failure {
             setBuildStatus("Build failed", "FAILURE");
 
-            /*slackSend channel:'#lab-ceres-mod4-sec1-status',
+            slackSend channel:'#lab-ceres-mod4-sec1-status',
                     color:COLOR_MAP[currentBuild.currentResult],
                     message: "[Grupo5][Pipeline IC/CD][Versión: 'v.'${pomVersion}][Stage: test][Resultado: Error/Fail]."
-                  */ 
+                  
         } 
     }
 }
